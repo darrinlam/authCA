@@ -1,6 +1,3 @@
-body {
-  padding: 0px;
-}
 
 .items {
     list-style: none;
@@ -42,7 +39,22 @@ h1 {
 form {
     text-align:center;
 }
+#control {
+    background:white;
+    width:750px;
+    margin:auto;
+    padding:0;
+    top:0;
+    left:25%;
+    right:25%;
+    position:fixed;
+    height:100%;
+    overflow:scroll;
+}
 
+body {
+    background: url("doodles.png")
+}
 html {
     margin:0;
     padding:0;
@@ -55,7 +67,6 @@ button {
   text-transform: uppercase;
   cursor: pointer;
   margin-top:5px;
-  
   
   
 }
@@ -79,6 +90,3 @@ input:hover::placeholder {
 li {
     list-style:none;
 }
-
-
-

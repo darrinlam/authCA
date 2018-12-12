@@ -1,23 +1,56 @@
 <!doctype html>
-<html ng-app="myApp"> 
-    
+<html ng-app="myApp">
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
-    <script src="todo.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        /*global angular*/
+        /*global todoDirective*/
+
+        angular.module('app', [])
+            .controller('mainCtrl', mainCtrl)
+            .directive('tododir', todoDirective);
+
+        function mainCtrl($scope) {
+
+            $scope.todos = [];
+
+
+            $scope.addNew = function(todo) {
+                $scope.todos.push({
+                    type: todo.type,
+                    task: todo.task,
+                    notes: todo.notes,
+                    importance: todo.importance
+                });
+
+                todo.type = '';
+                todo.task = '';
+                todo.notes = '';
+                todo.importance = '';
+            };
+
+            $scope.deleteTask = function(index) {
+                $scope.todos.splice(index, 1);
+
+            };
+
+        }
+    </script>
     <title>User Login and Sessions</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 </head>
-        
-<body>  
+
+<body>
     <div ng-controller="myController">
         <h2 id="welcomeText">Welcome. You are Logged In as
             <%= username %>
         </h2>
-        <a id="logoutLink" href="/logout">logout</a>
-        <a id="editLink" href="/user">Edit User</a>
-        <p>Your To-Do List<p>
+        
+
     </div>
-        <div id=control ng-app='app' ng-controller='mainCtrl'>
+    <div id=control ng-app='app' ng-controller='mainCtrl'>
         <h1>My To-Do List</h1>
 
         <form name='todo' ng-submit='addNew(todo)'>
@@ -29,10 +62,10 @@
 
             <button type='submit'>Add New</button>
         </form>
-        
+
         <ol class='todolist'>
             <li ng-repeat="todo in todos | orderBy:'-importance'">
-                <span class ="fa fa-close" ng-click=deleteTask()></span>
+                <span class="fa fa-close" ng-click=deleteTask()></span>
                 </br>
                 <span>
                     {{todo.type}} </br>
@@ -43,16 +76,17 @@
         </ol>
     </div>
     <hr>
+    
+    <a id="logoutLink" href="/logout">logout</a>
+        <a id="editLink" href="/user">Edit User</a>
+        <br>
     <span id="indexMsg">
         <%= msg %>
     </span>
     <hr>
-    <span id="colorText">
-    Color
-        <%= color %>
-      </span>
+
     <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
     <script src="/javascripts/my_app.js"></script>
 </body>
-      
+
 </html>
